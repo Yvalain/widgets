@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
+import Translate from './components/Translate';
+import Route from './components/Route';
 
 function App() {
   const items = [
@@ -34,23 +36,51 @@ function App() {
     },
   ];
 
-  const [selected, setSelected] = useState(options[0]);
-  const [showDropdown, setShowDropdown] = useState(true);
+  /*const [selected, setSelected] = useState(options[0]);
+  const [showDropdown, setShowDropdown] = useState(true); */
+
+  const showAccordion = () => {
+    if (window.location.pathname === '/') {
+      return <Accordion items={items} />;
+    }
+  };
+
+  const showList = () => {
+    if (window.location.pathname === '/list') {
+      return <Search />;
+    }
+  };
+
+  const showDropdown = () => {
+    if (window.location.pathname === '/dropdown') {
+      return <Dropdown />;
+    }
+  };
+
+  const showTranslate = () => {
+    if (window.location.pathname === '/translate') {
+      return <Translate />;
+    }
+  };
 
   return (
     <div>
-      {/* <Accordion items={items} /> */}
-      {/* <Search /> */}
-      <button onClick={() => setShowDropdown(!showDropdown)}>
+      {showAccordion()}
+      {showList()}
+      {showDropdown()}
+      {showTranslate()}
+      {/* <button onClick={() => setShowDropdown(!showDropdown)}>
         Toggle Dropdown
       </button>
       {showDropdown ? (
         <Dropdown
+          label='Select a color'
           selected={selected}
           onSelectedChange={setSelected}
           options={options}
         />
-      ) : null}
+      ) : null} */}
+      <Translate />
     </div>
   );
 }
